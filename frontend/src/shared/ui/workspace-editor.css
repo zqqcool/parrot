@@ -1,0 +1,153 @@
+.workspace-editor {
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--parrot-color-border-secondary);
+  border-radius: 8px;
+}
+
+.workspace-editor__splitter {
+  height: 100%;
+  min-height: 0;
+}
+
+.workspace-editor__tree {
+  height: 100%;
+  overflow: auto;
+  padding: 8px;
+  background: var(--parrot-color-fill-quaternary);
+}
+
+.workspace-editor__tree header {
+  display: flex;
+  gap: 4px;
+  min-height: 28px;
+  padding: 0 4px 6px;
+  color: var(--parrot-color-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.workspace-editor__tree-actions {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.workspace-editor__tree-actions .ant-btn {
+  width: 28px;
+  padding-inline: 0;
+}
+
+.workspace-editor__tree-entry {
+  display: inline-flex;
+  min-width: 0;
+  gap: 6px;
+  align-items: center;
+}
+
+.workspace-editor__tree-entry > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Root files cannot expand, so do not reserve Tree's empty switcher slot for them. */
+.workspace-editor__tree-node--root-file > .ant-tree-switcher-noop {
+  width: 0;
+}
+
+.workspace-editor__main {
+  display: grid;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.workspace-editor__tabs {
+  padding: 0 10px;
+  border-bottom: 1px solid var(--parrot-color-border-secondary);
+}
+
+.workspace-editor__tabs .ant-tabs-nav {
+  margin-bottom: 0;
+}
+
+.workspace-editor__tabs .ant-tabs-extra-content,
+.workspace-editor__tabs .ant-tabs-extra-content .ant-space {
+  display: inline-flex;
+  height: 32px;
+  align-items: center;
+}
+
+.workspace-editor__tabs .ant-segmented-item-label,
+.workspace-editor__tabs .ant-btn {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.workspace-editor__tabs .ant-segmented-item-selected .ant-segmented-item-label {
+  font-weight: 400;
+}
+
+.workspace-editor__tabs .ant-btn {
+  height: 24px;
+  padding-inline: 8px;
+}
+
+.workspace-editor__content {
+  position: relative;
+  display: grid;
+  min-height: 0;
+  place-items: center;
+}
+
+.workspace-editor__content .monaco-editor {
+  position: absolute;
+  inset: 0;
+}
+
+.workspace-editor__content--custom {
+  display: block;
+  overflow: auto;
+  padding: 16px;
+  background: var(--parrot-color-bg-container);
+  overscroll-behavior: contain;
+}
+
+.workspace-editor__main footer {
+  display: flex;
+  min-height: 52px;
+  padding: 8px 12px;
+  color: var(--parrot-color-text-secondary);
+  border-top: 1px solid var(--parrot-color-border-secondary);
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 760px) {
+  .admin-content-workspace {
+    display: block;
+    overflow-y: auto;
+  }
+
+  .skill-editor-page {
+    height: auto;
+    min-height: 68vh;
+  }
+
+  .workspace-editor {
+    min-height: 68vh;
+  }
+
+  .workspace-editor__splitter {
+    height: auto;
+    min-height: 68vh;
+  }
+
+  .workspace-editor__tree-actions .ant-btn {
+    padding-inline: 3px;
+  }
+}

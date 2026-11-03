@@ -1,0 +1,213 @@
+# Public test configuration. Never use these credentials for real accounts.
+# Supply a complete, explicitly selected TOML outside Git for deployment.
+[app]
+name = "parrot-backend"
+environment = "dev"
+debug = false
+
+[server]
+host = "127.0.0.1"
+port = 8000
+reload = false
+
+[api]
+prefix = "/api/v1"
+
+[logging]
+level = "DEBUG"
+json = false
+
+[database]
+enabled = true
+url = "postgresql+asyncpg://parrot_app:test-only-app-password@127.0.0.1:15432/parrot_local"
+platform_url = "postgresql+asyncpg://parrot_platform:test-only-platform-password@127.0.0.1:15432/parrot_local"
+migration_url = "postgresql+asyncpg://parrot_local:test-only-local-password@127.0.0.1:15432/parrot_local"
+pool_size = 5
+max_overflow = 10
+
+[redis]
+enabled = true
+url = "redis://127.0.0.1:16379/0"
+key_prefix = "parrot"
+
+[taskiq]
+queue_name = "parrot:tasks"
+consumer_group = "parrot"
+schedule_prefix = "parrot:schedules"
+dispatch_delay_seconds = 3
+stream_maxlen = 100000
+unacknowledged_idle_seconds = 600
+
+[security]
+session_cookie_name = "parrot_session"
+visitor_cookie_name = "parrot_visitor"
+session_pepper = "test-only-session-pepper-do-not-use-in-production"
+credential_encryption_key = "dGVzdC1vbmx5LXBhcnJvdC1lbmNyeXB0aW9uLWtleSE"
+secure_cookies = false
+session_absolute_seconds = 28800
+session_idle_seconds = 1800
+password_min_length = 12
+allowed_origins = ["http://127.0.0.1:5173", "http://localhost:5173", "http://127.0.0.1:5174", "http://localhost:5174"]
+
+[anonymous]
+session_ttl_seconds = 2592000
+rate_limit_requests = 30
+rate_limit_window_seconds = 60
+
+[limits]
+max_text_chars = 12000
+max_audio_ref_chars = 512
+
+[ai]
+allowed_model_hosts = []
+debug_log_prompts = false
+debug_capture_prompts = false
+agent_max_tool_rounds = 6
+agent_max_tool_calls = 12
+agent_max_consecutive_tool_errors = 3
+agent_max_output_tokens = 4096
+agent_model_retry_attempts = 2
+agent_max_control_plane_replans = 2
+agent_max_finalization_replans = 1
+agent_direct_rendering_enabled = true
+agent_loop_subagents_enabled = true
+agent_max_subagent_tasks = 5
+agent_max_parallel_subagents = 3
+agent_max_supporting_skills = 3
+max_parallel_tool_calls = 3
+capability_exact_repeat_limit = 1
+capability_similar_repeat_limit = 2
+capability_similarity_threshold = 0.6
+
+[media]
+max_agent_avatar_bytes = 2097152
+max_user_avatar_bytes = 2097152
+
+[object_storage]
+provider = "qiniu"
+bucket = "parrot-test-bucket"
+key_prefix = "parrot"
+download_domain = "https://storage.example.invalid"
+upload_token_seconds = 900
+access_key = "test-only-qiniu-access-key"
+secret_key = "test-only-qiniu-secret-key"
+
+[skills]
+package_directory = "../.runtime/skill-packages"
+artifact_directory = "../.runtime/skill-artifacts"
+max_package_bytes = 52428800
+max_artifact_bytes = 209715200
+
+[skills.sandbox]
+enabled = true
+session_directory = "../.runtime/skill-sessions"
+python_executable = "python3"
+node_executable = "node"
+npm_executable = "npm"
+shell_executable = "/bin/sh"
+bwrap_path = "bwrap"
+require_bubblewrap = false
+allow_unsafe_local_execution = true
+default_timeout_seconds = 60
+max_timeout_seconds = 300
+max_output_bytes = 262144
+
+[skills.build]
+session_directory = "tmp/skill-builds"
+timeout_seconds = 300
+
+[mcp]
+allowed_hosts = []
+connect_timeout_seconds = 15
+tool_timeout_seconds = 90
+max_discovered_tools_per_server = 100
+max_tool_result_bytes = 262144
+allow_stdio = false
+
+[memory]
+context_limit = 12
+context_max_tokens = 1800
+search_limit = 20
+max_content_chars = 8000
+
+[memory.embedding]
+base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+model = "text-embedding-v4"
+credential_ref = "dashscope-api-key"
+allowed_hosts = ["dashscope.aliyuncs.com"]
+timeout_seconds = 30
+
+[memory.embedding.extra_body]
+dimensions = 1024
+encoding_format = "float"
+
+[memory.vector]
+enabled = false
+uri = "http://vector.example.invalid:19530"
+database = "default"
+collection = "parrot_memory"
+token_ref = "milvus-root-token"
+embedding_dimension = 1024
+metric_type = "COSINE"
+
+[knowledge]
+staging_retention_hours = 24
+
+[knowledge.embedding]
+allowed_hosts = ["127.0.0.1", "dashscope.aliyuncs.com"]
+timeout_seconds = 30
+
+[knowledge.vector]
+uri = "http://vector.example.invalid:19530"
+database = "default"
+collection = "parrot_knowledge"
+token_ref = "milvus-root-token"
+embedding_dimension = 1024
+metric_type = "COSINE"
+candidate_multiplier = 4
+reciprocal_rank_constant = 60
+
+[capability_index]
+enabled = false
+
+[capability_index.embedding]
+base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+model = "text-embedding-v4"
+credential_ref = "dashscope-api-key"
+allowed_hosts = ["dashscope.aliyuncs.com"]
+timeout_seconds = 30
+
+[capability_index.vector]
+uri = "http://vector.example.invalid:19530"
+database = "default"
+collection = "parrot_capabilities"
+token_ref = "milvus-root-token"
+embedding_dimension = 1024
+metric_type = "COSINE"
+
+[runtime]
+request_timeout_seconds = 360
+poll_interval_seconds = 0.5
+lease_heartbeat_seconds = 15
+history_turns = 16
+history_max_tokens = 1800
+default_timezone = "Asia/Shanghai"
+
+[runtime.script]
+enabled = false
+default_timeout_seconds = 30
+max_timeout_seconds = 120
+
+[schedules]
+default_timezone = "Asia/Shanghai"
+
+[memory_credentials]
+
+[memory_credentials.values]
+dashscope-api-key = "test-only-dashscope-api-key"
+milvus-root-token = "test-only-milvus-root-token"
+
+[knowledge_credentials]
+
+[knowledge_credentials.values]
+milvus-root-token = "test-only-milvus-root-token"

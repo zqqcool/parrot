@@ -1,0 +1,56 @@
+.model-config-tabs > .ant-tabs-nav {
+  width: fit-content;
+  margin: 0 0 16px;
+  padding: 2px;
+  background: var(--parrot-color-fill-alter);
+  border: 1px solid var(--parrot-color-border-secondary);
+  border-radius: 8px;
+}
+
+.model-config-tabs > .ant-tabs-nav::before {
+  border-bottom: 0;
+}
+
+.model-config-tabs > .ant-tabs-nav .ant-tabs-nav-wrap {
+  flex: none;
+}
+
+.model-config-tabs > .ant-tabs-nav .ant-tabs-nav-list {
+  gap: 2px;
+}
+
+.model-config-tabs > .ant-tabs-nav .ant-tabs-tab {
+  margin: 0;
+  padding: 5px 12px;
+  color: var(--parrot-color-text-secondary);
+  font-size: 13px;
+  border-radius: 7px;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.model-config-tabs > .ant-tabs-nav .ant-tabs-tab:hover {
+  color: var(--parrot-color-primary);
+}
+
+.model-config-tabs > .ant-tabs-nav .ant-tabs-tab-active {
+  background: var(--parrot-color-bg-container);
+  box-shadow: 0 1px 3px rgb(24 39 75 / 12%);
+}
+
+.model-config-tabs > .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--parrot-color-primary);
+}
+
+.model-config-tabs > .ant-tabs-nav .ant-tabs-ink-bar {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .model-config-tabs > .ant-tabs-nav {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

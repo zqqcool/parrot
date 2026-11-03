@@ -1,0 +1,100 @@
+.chat-knowledge-sources {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.chat-knowledge-source-cards header,
+.chat-knowledge-media header {
+  margin-bottom: 8px;
+  color: var(--parrot-color-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chat-knowledge-source-cards ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chat-knowledge-source-cards li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  background: rgb(247 249 252);
+  border: 1px solid var(--parrot-color-border-secondary);
+  border-radius: 10px;
+}
+
+.chat-knowledge-source-index {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  color: var(--parrot-color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--parrot-color-primary-bg);
+  border-radius: 999px;
+  place-items: center;
+}
+
+.chat-knowledge-source-cards strong {
+  display: block;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.chat-knowledge-source-cards p {
+  margin: 2px 0 0;
+  color: var(--parrot-color-text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.chat-knowledge-media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.chat-knowledge-media figure {
+  margin: 0;
+}
+
+.chat-knowledge-media figcaption {
+  margin-top: 6px;
+  color: var(--parrot-color-text-secondary);
+  font-size: 12px;
+}
+
+.chat-knowledge-media-loading {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--parrot-color-text-secondary);
+  font-size: 12px;
+}
+
+.chat-knowledge-media-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: rgb(236 240 245);
+  border-radius: 8px;
+}
+
+.chat-knowledge-media .ant-image {
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.chat-knowledge-media .ant-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}

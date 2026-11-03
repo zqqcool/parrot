@@ -1,0 +1,190 @@
+asyncapi: 3.0.0
+info:
+  title: Parrot WebSocket IM API
+  version: 1.0.0
+  description: >-
+    A manually configured WebSocket IM channel creates inbound interactions and
+    delivers public output events on the same connection. HTTP and
+    SSE are not IM transports in this version.
+servers:
+  production:
+    host: parrot.example.com
+    pathname: /api/v1/im/ws/{channelKey}
+    protocol: wss
+    security:
+      - $ref: '#/components/securitySchemes/visitorSession'
+    variables:
+      channelKey:
+        description: Public key of a manually configured and enabled WebSocket channel.
+channels:
+  websocketChannel:
+    address: /api/v1/im/ws/{channelKey}
+    parameters:
+      channelKey:
+        description: Public key of the bound WebSocket channel.
+    messages:
+      clientCommand:
+        $ref: '#/components/messages/ClientCommand'
+      serverEvent:
+        $ref: '#/components/messages/ServerEvent'
+operations:
+  receiveCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/websocketChannel'
+    messages:
+      - $ref: '#/channels/websocketChannel/messages/clientCommand'
+  sendEvent:
+    action: send
+    channel:
+      $ref: '#/channels/websocketChannel'
+    messages:
+      - $ref: '#/channels/websocketChannel/messages/serverEvent'
+components:
+  securitySchemes:
+    visitorSession:
+      type: httpApiKey
+      in: cookie
+      name: parrot_visitor
+      description: Opaque HttpOnly visitor cookie issued during the WebSocket handshake.
+  messages:
+    ClientCommand:
+      payload:
+        $ref: '#/components/schemas/Envelope'
+      examples:
+        - name: createInteraction
+          payload:
+            version: '1'
+            type: interaction.create
+            message_id: msg_client_1
+            request_id: req_client_1
+            interaction_id: null
+            sequence: 0
+            occurred_at: '2026-07-14T08:00:00Z'
+            data:
+              text: Summarize the current release risks.
+              conversation_id: conversation_1
+        - name: subscribeAfterReconnect
+          payload:
+            version: '1'
+            type: interaction.subscribe
+            message_id: msg_client_2
+            request_id: req_client_2
+            interaction_id: interaction_1
+            sequence: 14
+            occurred_at: '2026-07-14T08:00:00Z'
+            data: {}
+        - name: approvePendingAction
+          payload:
+            version: '1'
+            type: interaction.approve
+            message_id: msg_client_3
+            request_id: req_client_3
+            interaction_id: interaction_1
+            sequence: 18
+            occurred_at: '2026-07-19T08:00:00Z'
+            data:
+              action_id: pending_action_1
+              action_hash: sha256:example
+              version: v1
+    ServerEvent:
+      payload:
+        $ref: '#/components/schemas/Envelope'
+      examples:
+        - name: accepted
+          payload:
+            version: '1'
+            type: interaction.accepted
+            message_id: msg_server_1
+            request_id: req_client_1
+            interaction_id: interaction_1
+            sequence: 0
+            occurred_at: '2026-07-14T08:00:01Z'
+            data:
+              status: accepted
+        - name: outputDelta
+          payload:
+            version: '1'
+            type: ai.output.delta
+            message_id: event_15
+            request_id: req_client_1
+            interaction_id: interaction_1
+            sequence: 15
+            occurred_at: '2026-07-14T08:00:02Z'
+            data:
+              output_id: output_1
+              delta: Release risk summary...
+              delta_index: 0
+        - name: outputReset
+          payload:
+            version: '1'
+            type: ai.output.reset
+            message_id: event_16
+            request_id: req_client_1
+            interaction_id: interaction_1
+            sequence: 16
+            occurred_at: '2026-07-14T08:00:03Z'
+            data:
+              output_id: output_1
+        - name: outputCompleted
+          payload:
+            version: '1'
+            type: ai.output.completed
+            message_id: event_17
+            request_id: req_client_1
+            interaction_id: interaction_1
+            sequence: 17
+            occurred_at: '2026-07-14T08:00:04Z'
+            data:
+              output_id: output_1
+              content: Release risk summary...
+              runtime_status: completed
+              citations:
+                - citation_id: knowledge_chunk_1
+                  title: Release runbook
+                  anchor: slide-4
+                  slide_no: 4
+              media:
+                - citation_id: knowledge_chunk_1
+                  asset_id: knowledge_media_asset_1
+                  kind: slide_render
+                  role: primary
+                  alt: 幻灯片 4
+  schemas:
+    Envelope:
+      type: object
+      additionalProperties: false
+      required: [version, type, message_id, request_id, data]
+      properties:
+        version:
+          const: '1'
+        type:
+          type: string
+          description: >-
+            Client commands: ping, interaction.create, interaction.subscribe,
+            interaction.ack, interaction.cancel, interaction.steer, interaction.approve,
+            interaction.reject. Approval commands must echo the actor-bound action_id,
+            action_hash and version returned by the waiting output. Server events:
+            connection.ready, interaction.accepted, pong, error, and public persisted output events
+            ai.output.delta, ai.output.reset, ai.output.completed, ai.output.cancelled,
+            ai.output.failed, ai.thinking.delta, and ai.thinking.completed. Internal runtime
+            events are never sent to visitor connections.
+        message_id:
+          type: string
+          maxLength: 128
+          description: Client idempotency key for interaction.create; server event identifier otherwise.
+        request_id:
+          type: string
+          maxLength: 128
+        interaction_id:
+          type: [string, 'null']
+          maxLength: 64
+        sequence:
+          type: [integer, 'null']
+          minimum: 0
+        occurred_at:
+          type: [string, 'null']
+          format: date-time
+        data:
+          type: object
+          additionalProperties: true

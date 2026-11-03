@@ -1,0 +1,101 @@
+.run-event-drawer .ant-drawer-header {
+  padding: 18px 24px;
+  background: linear-gradient(120deg, #f8fbff, #fff);
+  border-bottom-color: #dbe8f6;
+}
+
+.run-event-drawer .ant-drawer-title {
+  color: #263b55;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.run-event-drawer .ant-drawer-body {
+  padding: 20px 24px 28px;
+}
+
+.run-event-drawer__content {
+  display: grid;
+  gap: 18px;
+}
+
+.run-event-drawer__summary {
+  display: grid;
+  gap: 7px;
+  padding: 15px 16px;
+  background: linear-gradient(135deg, #edf6ff, #f8fcff);
+  border: 1px solid #d7eaff;
+  border-radius: 10px;
+}
+
+.run-event-drawer__summary span,
+.run-event-drawer__payload header > span:last-child {
+  color: #7186a0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.run-event-drawer__summary strong {
+  overflow-wrap: anywhere;
+  color: #274462;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+}
+
+.run-event-drawer .ant-descriptions-item-label {
+  width: 94px;
+  color: #6d8095;
+  font-size: 12px;
+}
+
+.run-event-drawer .ant-descriptions-item-content {
+  overflow-wrap: anywhere;
+  color: #31465f;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+}
+
+.run-event-drawer__payload {
+  overflow: hidden;
+  border: 1px solid #dce8f5;
+  border-radius: 10px;
+}
+
+.run-event-drawer__payload header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 13px;
+  color: #4b6480;
+  font-size: 12px;
+  font-weight: 650;
+  background: #f6faff;
+  border-bottom: 1px solid #e1ecf7;
+}
+
+.run-event-drawer__payload pre {
+  max-height: min(48vh, 480px);
+  margin: 0;
+  padding: 14px;
+  overflow: auto;
+  color: #31465f;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #fbfdff;
+}
+
+.run-diagnostic-section {
+  display: grid;
+  gap: 8px;
+}
+
+.run-diagnostic-section h3 {
+  margin: 0;
+  color: #4b6480;
+  font-size: 13px;
+}

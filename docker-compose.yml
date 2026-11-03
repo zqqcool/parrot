@@ -1,0 +1,119 @@
+x-backend-service: &backend-service
+  build:
+    context: ./backend
+    args:
+      PARROT_CONFIG_FILE: config/sit.toml
+  image: parrot-backend:local
+  volumes:
+    - skill_packages:/var/lib/parrot/skill-packages
+    - skill_artifacts:/var/lib/parrot/skill-artifacts
+    - skill_sessions:/var/lib/parrot/skill-sessions
+    - skill_builds:/var/lib/parrot/skill-builds
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+    migrate:
+      condition: service_completed_successfully
+
+services:
+  postgres:
+    image: postgres:16-bookworm
+    ports:
+      - "127.0.0.1:15432:5432"
+    environment:
+      POSTGRES_DB: parrot_local
+      POSTGRES_USER: parrot_local
+      POSTGRES_PASSWORD: test-only-local-password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U parrot_local -d parrot_local
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "127.0.0.1:16379:6379"
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  migrate:
+    <<: *backend-service
+    command:
+      - /bin/sh
+      - -c
+      - parrot db-upgrade --config /etc/parrot/config.toml && parrot sync-permissions --config /etc/parrot/config.toml
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: "no"
+
+  backend:
+    <<: *backend-service
+    expose:
+      - "8000"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/ready', timeout=3)
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    image: parrot-frontend:local
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+  taskiq-worker:
+    <<: *backend-service
+    command: ["taskiq", "worker", "--workers", "1", "--max-async-tasks", "16", "--ack-type", "when_executed", "app.modules.taskiq_entrypoints:container_broker"]
+    profiles: ["workers"]
+    restart: unless-stopped
+
+  taskiq-scheduler:
+    <<: *backend-service
+    command: ["taskiq", "scheduler", "--update-interval", "1", "--loop-interval", "1", "app.modules.taskiq_entrypoints:container_scheduler"]
+    profiles: ["workers"]
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  skill_packages:
+  skill_artifacts:
+  skill_sessions:
+  skill_builds:

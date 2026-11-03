@@ -1,0 +1,195 @@
+.agent-management-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 360px));
+  gap: 14px;
+}
+.agent-management-card {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  border-radius: 10px;
+}
+.agent-management-card::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: var(--parrot-color-border-secondary);
+  content: "";
+}
+.agent-management-card.is-published::before {
+  background: linear-gradient(90deg, var(--parrot-color-primary), var(--parrot-color-success));
+}
+.agent-management-card .ant-card {
+  height: 100%;
+  border-color: var(--parrot-color-border-secondary);
+  border-radius: 10px;
+  box-shadow: var(--parrot-box-shadow-tertiary);
+  transition:
+    border-color 150ms,
+    box-shadow 150ms;
+}
+.agent-management-card .ant-card:hover {
+  border-color: var(--parrot-color-primary-border);
+  box-shadow: var(--parrot-box-shadow-secondary);
+}
+.agent-management-card .ant-card-body {
+  display: flex;
+  min-height: 252px;
+  flex-direction: column;
+  padding: 16px;
+}
+.agent-card-heading {
+  display: flex;
+  min-width: 0;
+  gap: 10px;
+  align-items: center;
+}
+.agent-card-avatar.ant-avatar {
+  flex: 0 0 48px;
+  color: var(--parrot-color-primary);
+  background: var(--parrot-color-primary-bg);
+  border: 1px solid var(--parrot-color-primary-border);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.agent-card-avatar img {
+  object-fit: cover;
+}
+.agent-card-title {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+  flex: 1;
+}
+.agent-card-title h2,
+.agent-card-slug,
+.agent-card-details dd {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.agent-card-title h2 {
+  margin: 0;
+  color: var(--parrot-color-text);
+  font-size: 16px;
+  line-height: 22px;
+}
+.agent-card-slug,
+.agent-card-details dt {
+  color: var(--parrot-color-text-secondary);
+  font-size: 12px;
+}
+.agent-card-heading .ant-tag {
+  margin-inline-end: 0;
+}
+.agent-card-description {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: 18px;
+  margin: 12px 0 8px;
+  color: var(--parrot-color-text-secondary);
+  font-size: 13px;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.agent-card-tags {
+  display: flex;
+  min-height: 24px;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.agent-card-tags .ant-tag {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  margin-inline-end: 0;
+}
+.agent-card-details {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  background: var(--parrot-color-fill-quaternary);
+  border-radius: 8px;
+}
+.agent-card-details > div {
+  display: flex;
+  min-width: 0;
+  justify-content: space-between;
+  gap: 12px;
+}
+.agent-card-details dt,
+.agent-card-details dd {
+  margin: 0;
+}
+.agent-card-details dd {
+  display: inline-flex;
+  max-width: 65%;
+  gap: 6px;
+  align-items: center;
+  color: var(--parrot-color-text);
+  font-size: 12px;
+  text-align: right;
+}
+.agent-card-details dd.is-active {
+  color: var(--parrot-color-success);
+}
+.agent-card-details dd.is-disabled {
+  color: var(--parrot-color-text-secondary);
+}
+.agent-card-status-dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  background: currentColor;
+  border-radius: 50%;
+}
+.agent-card-actions {
+  display: flex;
+  min-height: 32px;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+}
+.agent-card-link {
+  display: inline-flex;
+  min-height: 32px;
+  gap: 4px;
+  padding: 0 2px;
+  align-items: center;
+  color: var(--parrot-color-primary);
+  font-size: 13px;
+}
+.agent-management-empty {
+  min-height: 240px;
+  padding: 24px;
+  background: var(--parrot-color-bg-container);
+  border: 1px solid var(--parrot-color-border-secondary);
+  border-radius: 8px;
+}
+
+@media (max-width: 520px) {
+  .agent-management-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .agent-management-card .ant-card-body {
+    min-height: 0;
+    padding: 14px;
+  }
+  .agent-card-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .agent-card-heading .ant-tag {
+    margin-left: 58px;
+  }
+}

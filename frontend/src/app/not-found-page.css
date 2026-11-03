@@ -1,0 +1,113 @@
+.not-found-page {
+  display: grid;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 24px;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 0%, rgb(22 119 255 / 10%), transparent 32%),
+    linear-gradient(180deg, #fbfcff 0%, #f4f7fc 100%);
+}
+
+.not-found-card {
+  display: grid;
+  width: min(100%, 520px);
+  padding: 48px;
+  justify-items: center;
+  text-align: center;
+  background: var(--parrot-color-bg-container);
+  border: 1px solid var(--parrot-color-border-secondary);
+  border-radius: 16px;
+  box-shadow: 0 18px 48px rgb(31 45 72 / 12%);
+}
+
+.not-found-brand {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--parrot-color-text-heading);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.not-found-brand .brand-logo {
+  width: 30px;
+  height: 30px;
+}
+
+.not-found-status {
+  margin-top: 36px;
+  color: var(--parrot-color-primary);
+  font-size: clamp(72px, 15vw, 112px);
+  font-weight: 750;
+  letter-spacing: -0.08em;
+  line-height: 0.9;
+}
+
+.not-found-copy {
+  margin-top: 24px;
+}
+
+.not-found-copy h1 {
+  margin: 0;
+  color: var(--parrot-color-text-heading);
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.not-found-copy p {
+  max-width: 360px;
+  margin: 10px 0 0;
+  color: var(--parrot-color-text-secondary);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.not-found-actions {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.not-found-actions .ant-btn {
+  min-width: 158px;
+}
+
+.not-found-actions > a {
+  color: var(--parrot-color-text-secondary);
+  font-size: 14px;
+}
+
+.not-found-actions > a:hover {
+  color: var(--parrot-color-primary);
+}
+
+.not-found-code {
+  margin: 32px 0 0;
+  color: var(--parrot-color-text-tertiary, var(--parrot-color-text-secondary));
+  font-size: 12px;
+}
+
+@media (max-width: 480px) {
+  .not-found-page {
+    padding: 16px;
+  }
+
+  .not-found-card {
+    padding: 36px 24px;
+  }
+
+  .not-found-status {
+    margin-top: 30px;
+  }
+
+  .not-found-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .not-found-actions .ant-btn {
+    width: 100%;
+  }
+}

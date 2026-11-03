@@ -1,0 +1,5 @@
+# One relative path per line followed by ` | owner | reason | removal condition`.
+# Generated files do not need an entry.
+backend/alembic/versions/0001_platform_foundation.py | backend | Initial schema is kept as one immutable migration for atomic bootstrap and review. | Never; future schema changes use new migrations.
+frontend/src/app/admin.css | frontend | Existing consolidated administration stylesheet predates the runtime migration and is shared by the current console. | Split by administration feature before the next visual-system expansion.
+frontend/src/app/Pages.test.tsx | frontend | Existing cross-page integration fixture deliberately shares one authenticated MSW setup. | Split into feature test files when the administration test harness is next refactored.

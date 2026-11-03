@@ -1,0 +1,48 @@
+.parrot-icon {
+  --parrot-icon-size: 16px;
+
+  display: inline-flex;
+  width: var(--parrot-icon-size);
+  height: var(--parrot-icon-size);
+  flex: 0 0 var(--parrot-icon-size);
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.parrot-icon--xs {
+  --parrot-icon-size: 12px;
+}
+
+.parrot-icon--sm {
+  --parrot-icon-size: 14px;
+}
+
+.parrot-icon--md {
+  --parrot-icon-size: 16px;
+}
+
+.parrot-icon--lg {
+  --parrot-icon-size: 20px;
+}
+
+.parrot-icon--xl {
+  --parrot-icon-size: 24px;
+}
+
+.parrot-icon--2xl {
+  --parrot-icon-size: 32px;
+}
+
+.parrot-icon--3xl {
+  --parrot-icon-size: 40px;
+}
+
+.parrot-icon > .i-icon,
+.parrot-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+}

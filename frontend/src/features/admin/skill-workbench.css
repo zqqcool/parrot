@@ -1,0 +1,146 @@
+.skill-detail-page {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.skill-detail-page > .admin-page-header {
+  margin-bottom: 0;
+}
+
+.skill-editor-page {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.skill-editor-page > .admin-page-header.admin-page-header {
+  flex: none;
+  margin-bottom: 0;
+}
+
+.skill-editor-page > .workspace-editor {
+  min-height: 0;
+  flex: 1 1 auto;
+  border-radius: 10px;
+}
+
+.skill-editor-page .workspace-editor__tree {
+  padding: 12px;
+}
+
+.skill-editor-page .workspace-editor__tree header {
+  min-height: 32px;
+  padding: 0 4px 10px;
+}
+
+.skill-editor-page .workspace-editor__tabs {
+  padding: 4px 14px 0;
+}
+
+.skill-manifest-form {
+  display: grid;
+  max-width: 1080px;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+.skill-manifest-form__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.skill-manifest-form__header .ant-typography {
+  flex: 1 1 360px;
+  margin-bottom: 0;
+}
+
+.skill-manifest-json-editor {
+  display: grid;
+  gap: 12px;
+}
+
+.skill-manifest-json-editor textarea {
+  font-family: var(--parrot-font-family-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  line-height: 1.6;
+}
+
+.skill-manifest-form > .ant-typography,
+.skill-manifest-form > .ant-alert,
+.skill-manifest-form > .ant-card {
+  margin-bottom: 0;
+}
+
+.skill-manifest-form .ant-alert {
+  margin-bottom: 12px;
+}
+
+.skill-manifest-form .ant-form-item {
+  margin-bottom: 12px;
+}
+
+.skill-detail-summary .ant-descriptions-item-content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.skill-detail-summary {
+  padding: 10px 16px 4px;
+  background: var(--parrot-color-fill-quaternary);
+  border: 1px solid var(--parrot-color-border-secondary);
+  border-radius: 8px;
+}
+
+.skill-detail-summary .ant-descriptions-item-label {
+  color: var(--parrot-color-text-secondary);
+  font-size: 13px;
+}
+
+.skill-availability {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.skill-availability .ant-switch.ant-switch-disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.skill-scope {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.skill-version-history {
+  padding: 16px;
+  background: var(--parrot-color-bg-container);
+  border: 1px solid var(--parrot-color-border-secondary);
+  border-radius: 8px;
+}
+
+.skill-version-history h2,
+.skill-version-history p {
+  margin: 0;
+}
+
+.skill-version-history p {
+  margin: 6px 0 16px;
+  color: var(--parrot-color-text-secondary);
+}
+
+.skill-version-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

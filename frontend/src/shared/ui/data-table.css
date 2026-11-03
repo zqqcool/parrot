@@ -1,0 +1,7 @@
+.parrot-data-table {
+  overflow: hidden;
+  background: var(--parrot-color-bg-container);
+  border: 1px solid var(--parrot-color-border-secondary);
+  border-radius: 8px;
+  box-shadow: var(--parrot-box-shadow-tertiary);
+}

@@ -1,0 +1,60 @@
+.user-avatar-upload {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.user-avatar-upload .ant-upload {
+  display: block;
+}
+
+.user-avatar-upload-trigger {
+  display: inline-flex;
+  gap: 8px;
+  padding: 0;
+  align-items: center;
+  color: var(--parrot-color-text-secondary);
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.user-avatar-upload-trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.user-avatar-upload-preview.ant-avatar {
+  color: var(--parrot-color-primary);
+  background: var(--parrot-color-primary-bg);
+  border: 1px solid var(--parrot-color-primary-border);
+}
+
+.user-avatar-upload-preview img {
+  object-fit: cover;
+}
+
+.user-avatar-upload-trigger:hover:not(:disabled) .user-avatar-upload-preview {
+  border-color: var(--parrot-color-primary);
+  box-shadow: 0 0 0 3px var(--parrot-color-primary-bg);
+}
+
+.user-avatar-upload-remove {
+  padding: 0;
+  color: var(--parrot-color-text-secondary);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.user-avatar-upload-remove:hover:not(:disabled) {
+  color: var(--parrot-color-primary);
+}
+
+.user-avatar-upload-error {
+  width: 100%;
+  margin-top: 4px;
+}
